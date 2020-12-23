@@ -1,0 +1,52 @@
+query GET_ALL_USERS {
+  getAllUsers {
+    id
+    username
+    email
+    bio
+    image
+    email_verified
+    refresh_token
+    access_token
+    updatedAt
+    createAt
+  }
+}
+
+query GET_USER($id: ID!) {
+  getUser(id: $id) {
+    id
+    username
+    email
+    bio
+    image
+    email_verified
+    refresh_token
+    access_token
+    updatedAt
+    createAt
+  }
+}
+
+mutation REGISTER_NEW_USER(
+  $username: String!
+  $email: String!
+  $password: String!
+) {
+  registerUser(
+    newUser: { username: $username, email: $email, password: $password }
+  ) {
+    user {
+    id
+    username
+    email
+    bio
+    image
+    email_verified
+    refresh_token
+    access_token
+    updatedAt
+    createAt
+    }
+  }
+}
