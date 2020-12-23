@@ -70,17 +70,13 @@ example errors
   "password": "toma"
 }
 
-headers={
-'Authorization': 'Token access_token'
-}
-
 refresh_token != ''
 access_token != ''
 !!! check to exist user
 
 output: User
 
-example: {
+example output: {
   "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1OTY3OTIwODcsIm5iZiI6MTU5Njc5MjA4NywianRpIjoiNjljNjE5ZDMtMWY0MS00ZTc1LThlY2MtZmQwNjJlNmMzNjRmIiwiZXhwIjoxNTk2NzkyOTg3LCJpZGVudGl0eSI6OSwiZnJlc2giOnRydWUsInR5cGUiOiJhY2Nlc3MifQ.v0kPNspF3MvjE-AGNxs0Z68rvHtU97IhlOVRVKf20Pw",
   "bio": null,
   "created_at": "2020-08-07T07:42:27.017673",
@@ -90,10 +86,6 @@ example: {
   "refresh_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1OTY3OTIwODcsIm5iZiI6MTU5Njc5MjA4NywianRpIjoiMWY0YWM1NDUtMGZhMS00OWZkLWI4ZjYtNzgzMGEwMzM5MDgwIiwiZXhwIjoxNTk5Mzg0MDg3LCJpZGVudGl0eSI6OSwidHlwZSI6InJlZnJlc2gifQ.EGMrpXU6iNC84CgV-5AhqglieZYyHm-8V_0_NmzAddc",
   "updated_at": "2020-08-07T07:42:27.017685",
   "username": "toma"
-}
-
-example headers: {
-    Authorization: Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1OTY4MDgyNTUsIm5iZiI6MTU5NjgwODI1NSwianRpIjoiMWE3MTczN2QtNjU4MC00YzU3LTk3YjEtMzlkYTFkNTFkZDk1IiwiZXhwIjoxNTk2ODA5MTU1LCJpZGVudGl0eSI6OSwiZnJlc2giOnRydWUsInR5cGUiOiJhY2Nlc3MifQ.iLphhXGkYTZUfxxORXjKX_Xd9BHIY9JHBJwWlV0y6z0
 }
 
 example errors:
@@ -116,9 +108,13 @@ headers={
 'Authorization': 'Token access_token'
 }
 
+example headers: {
+    Authorization: Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1OTY4MDgyNTUsIm5iZiI6MTU5NjgwODI1NSwianRpIjoiMWE3MTczN2QtNjU4MC00YzU3LTk3YjEtMzlkYTFkNTFkZDk1IiwiZXhwIjoxNTk2ODA5MTU1LCJpZGVudGl0eSI6OSwiZnJlc2giOnRydWUsInR5cGUiOiJhY2Nlc3MifQ.iLphhXGkYTZUfxxORXjKX_Xd9BHIY9JHBJwWlV0y6z0
+}
+
 output: User
 
-example:
+example output:
 {
   "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1OTY5MDgwODAsIm5iZiI6MTU5NjkwODA4MCwianRpIjoiMGI0YjZiMDMtMjIwYy00ZGVhLThjZTMtNjA1NmMxOTllY2ZhIiwiZXhwIjoxNTk2OTA4OTgwLCJpZGVudGl0eSI6OSwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.GVevd8aPqQ-M97T_L_WDSy10vGhOJhHl4Qd1BrEzJV0",
   "bio": null,
@@ -129,10 +125,6 @@ example:
   "refresh_token": "",
   "updated_at": "2020-08-07T07:42:27.017685",
   "username": "toma"
-}
-
-example headers: {
-    Authorization: Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1OTY4MDgyNTUsIm5iZiI6MTU5NjgwODI1NSwianRpIjoiMWE3MTczN2QtNjU4MC00YzU3LTk3YjEtMzlkYTFkNTFkZDk1IiwiZXhwIjoxNTk2ODA5MTU1LCJpZGVudGl0eSI6OSwiZnJlc2giOnRydWUsInR5cGUiOiJhY2Nlc3MifQ.iLphhXGkYTZUfxxORXjKX_Xd9BHIY9JHBJwWlV0y6z0
 }
 
 output with errors:
@@ -157,13 +149,14 @@ headers={
 'Authorization': 'Token access_token'
 }
 
+example headers: {
+    Authorization: Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1OTY4MDgyNTUsIm5iZiI6MTU5NjgwODI1NSwianRpIjoiMWE3MTczN2QtNjU4MC00YzU3LTk3YjEtMzlkYTFkNTFkZDk1IiwiZXhwIjoxNTk2ODA5MTU1LCJpZGVudGl0eSI6OSwiZnJlc2giOnRydWUsInR5cGUiOiJhY2Nlc3MifQ.iLphhXGkYTZUfxxORXjKX_Xd9BHIY9JHBJwWlV0y6z0
+}
+
 !!! update field: updated_at
 
 output: User
 
-example headers: {
-    Authorization: Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1OTY4MDgyNTUsIm5iZiI6MTU5NjgwODI1NSwianRpIjoiMWE3MTczN2QtNjU4MC00YzU3LTk3YjEtMzlkYTFkNTFkZDk1IiwiZXhwIjoxNTk2ODA5MTU1LCJpZGVudGl0eSI6OSwiZnJlc2giOnRydWUsInR5cGUiOiJhY2Nlc3MifQ.iLphhXGkYTZUfxxORXjKX_Xd9BHIY9JHBJwWlV0y6z0
-}
 ```
 
 ## CHANGE PASSWORD
@@ -174,14 +167,18 @@ input: {
     old_password, new_password1, new_password2
 }
 
-!!! check new password1 === new_password2
-!!! check is_old_password_correct
-
-output: 'User password has been changed successfully!'
+headers={
+'Authorization': 'Token access_token'
+}
 
 example headers: {
     Authorization: Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1OTY4MDgyNTUsIm5iZiI6MTU5NjgwODI1NSwianRpIjoiMWE3MTczN2QtNjU4MC00YzU3LTk3YjEtMzlkYTFkNTFkZDk1IiwiZXhwIjoxNTk2ODA5MTU1LCJpZGVudGl0eSI6OSwiZnJlc2giOnRydWUsInR5cGUiOiJhY2Nlc3MifQ.iLphhXGkYTZUfxxORXjKX_Xd9BHIY9JHBJwWlV0y6z0
 }
+
+!!! check new password1 === new_password2
+!!! check is_old_password_correct
+
+output: {message : 'User password has been changed successfully!'}
 
 output with errors:
 {
