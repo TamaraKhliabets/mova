@@ -11,4 +11,11 @@ router.route('/word').post(
   })
 );
 
+router.route('/word').get(
+  catchErrors(async (_, res) => {
+    const words = await wordController.getAllWords();
+    return res.status(200).json({ words });
+  })
+);
+
 module.exports = router;
