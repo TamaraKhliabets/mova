@@ -2,17 +2,16 @@ const express = require('express');
 
 const router = express.Router();
 
-const UserController = require('./user.controller');
-const UserSchema = require('./user.schema');
+const userController = require('./user.controller');
+const userSchema = require('./user.schema');
 
 router.route('/').get(async (req, res) => {
-  const users = await UserController.getAllUsers();
-  console.log(users);
+  const users = await userController.getAllUsers();
 
   if (!users) {
     return res.status(404).send({ message: 'Users not found.' });
   }
-  return res.status(200).json(users.map(UserSchema.toResponse));
+  return res.status(200).json(users.map(userSchema.toResponse));
 });
 
 module.exports = router;
