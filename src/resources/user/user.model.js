@@ -1,7 +1,7 @@
-const User = require('./user.schema');
+const user = require('./user.schema');
 
 const getAllUsers = async () => {
-  return User.find({}).exec();
+  return user.find({}).exec();
 };
 
 module.exports = {
