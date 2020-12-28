@@ -18,11 +18,6 @@ app.use('/', (req, res, next) => {
 app.use('/users', userRouter);
 
 const connectDb = () => {
-  mongoose.connect(MONGO_DB_CONNECTION_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  });
-
   const db = mongoose.connection;
   db.on('error', (err) => {
     console.log('err', err);
@@ -30,12 +25,17 @@ const connectDb = () => {
   db.once('connected', () => {
     console.log('mongoose is connected');
   });
+  return mongoose.connect(MONGO_DB_CONNECTION_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  });
 };
 
 try {
-  connectDb();
-  app.listen(PORT, () => {
-    console.log(`app is listening to PORT ${PORT}`);
+  connectDb().then(() => {
+    app.listen(PORT, () => {
+      console.log(`app is listening to PORT ${PORT}`);
+    });
   });
 } catch (err) {
   console.log(err.message);
