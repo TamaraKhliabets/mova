@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const { PORT, MONGO_DB_CONNECTION_URL } = require('./config');
 
-const userRouter = require('./resources/user.router');
+const userRouter = require('./resources/user/user.router');
 
 const app = express();
 

@@ -14,7 +14,6 @@ const userSchema = new mongoose.Schema(
 );
 
 userSchema.statics.toResponse = (user) => {
-  console.log(user);
   const { id, username, email } = user;
   return { id, username, email };
 };
