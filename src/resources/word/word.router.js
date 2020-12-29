@@ -14,6 +14,11 @@ router.route('/word').post(
 router.route('/word').get(
   catchErrors(async (_, res) => {
     const words = await wordController.getAllWords();
+
+    if (!words) {
+      return res.status(404).send({ message: 'Words not found.' });
+    }
+
     return res.status(200).json({ words });
   })
 );
