@@ -27,7 +27,7 @@ router.route('/word/:id').get(
       return res.status(404).send({ message: 'Word not found.' });
     }
 
-    return res.status(200).json({ word: word });
+    return res.status(200).json({ word });
   })
 );
 
