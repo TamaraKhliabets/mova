@@ -31,4 +31,18 @@ router.route('/word/:id').get(
   })
 );
 
+router.route('/word/:id').put(
+  catchErrors(async (req, res) => {
+    const { id } = req.params;
+    const word = await wordController.updateWord(id, req.body);
+
+    if (!word) {
+      return res.status(404).send({ message: 'Word not found.' });
+    }
+
+    const updateWord = await wordController.getWordById(id);
+    return res.status(200).json({ word: updateWord });
+  })
+);
+
 module.exports = router;
