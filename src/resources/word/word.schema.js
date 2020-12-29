@@ -12,9 +12,18 @@ const wordSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  extended_description: String,
-  usages: String,
-  synonyms: String,
+  extended_description: {
+    type: String,
+    default: null
+  },
+  usages: {
+    type: String,
+    default: null
+  },
+  synonyms: {
+    type: String,
+    default: null
+  },
   created_at: {
     type: Date,
     default: Date.now()
@@ -23,16 +32,21 @@ const wordSchema = new mongoose.Schema({
     type: Date,
     default: Date.now()
   },
-  is_anonymous: Boolean,
-  is_on_report_feed: Boolean,
-  userId: { type: mongoose.ObjectId, ref: 'users' },
+  is_anonymous: {
+    type: Boolean,
+    default: false
+  },
+  is_on_report_feed: {
+    type: Boolean,
+    default: false
+  },
   tags: [
     {
       type: String,
-      tagname: String,
-      default: []
+      tagname: String
     }
-  ]
+  ],
+  userId: { type: mongoose.ObjectId, ref: 'userProfile' }
 });
 
 const word = mongoose.model('words', wordSchema);

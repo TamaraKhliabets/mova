@@ -7,7 +7,7 @@ const { catchErrors } = require('../../middleware/catchErrors');
 router.route('/word').post(
   catchErrors(async (req, res) => {
     const word = await wordController.createWord(req.body);
-    return res.status(200).json({ word: word });
+    return res.status(200).json({ word });
   })
 );
 
