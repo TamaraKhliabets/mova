@@ -45,4 +45,17 @@ router.route('/word/:id').put(
   })
 );
 
+router.route('/word/:id').delete(
+  catchErrors(async (req, res) => {
+    const { id } = req.params;
+    const word = await wordController.deleteWord(id, req.body);
+
+    if (!word) {
+      return res.status(404).send({ message: 'Word not found.' });
+    }
+
+    return res.status(200).json({ message: 'Word was deleted.' });
+  })
+);
+
 module.exports = router;
