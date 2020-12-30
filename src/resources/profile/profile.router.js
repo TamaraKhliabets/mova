@@ -14,7 +14,7 @@ router.route('/:username').get(async (req, res) => {
     // create profile
   }
   const { _id: id } = user;
-  const profile = await profileController.createProfile(id);
+  const profile = await profileController.getProfileById(id);
   return res.status(200).json(profileSchema.toResponse(profile));
 });
 

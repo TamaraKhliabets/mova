@@ -5,11 +5,11 @@ const getUserByUsername = async (username) => {
   return userSchema.findOne({ username: username.toString() }).exec();
 };
 
-const createProfile = async (userId) => {
-  return profileSchema.create({ user_id: userId });
+const getProfileById = async (userId) => {
+  return profileSchema.findOne({ user_id: userId }).exec();
 };
 
 module.exports = {
   getUserByUsername,
-  createProfile
+  getProfileById
 };
