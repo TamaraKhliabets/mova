@@ -46,7 +46,8 @@ const wordSchema = new mongoose.Schema({
       tagname: String
     }
   ],
-  userId: { type: mongoose.ObjectId, ref: 'userProfile' }
+  userId: { type: mongoose.ObjectId, ref: 'userProfile' },
+  favoriters: [{ type: mongoose.ObjectId, ref: 'userProfile' }]
 });
 
 const word = mongoose.model('words', wordSchema);
