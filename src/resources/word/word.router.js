@@ -20,7 +20,7 @@ router.route('/word').get(
       return res.status(404).send({ message: 'Words not found.' });
     }
 
-    return res.status(200).json({ words });
+    return res.status(200).json(words.map(wordSchema.toResponse));
   })
 );
 
