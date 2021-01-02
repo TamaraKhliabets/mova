@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
 const wordController = require('./word.controller');
+const wordSchema = require('./word.schema');
 const { catchErrors } = require('../../middleware/catchErrors');
 
 router.route('/word').post(
