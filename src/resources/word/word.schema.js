@@ -50,6 +50,39 @@ const wordSchema = new mongoose.Schema({
   favoriters: [{ type: mongoose.ObjectId, ref: 'userProfile' }]
 });
 
+wordSchema.statics.toResponse = (word) => {
+  const {
+    id,
+    wordname,
+    meaning,
+    extended_description,
+    usages,
+    synonyms,
+    created_at,
+    updated_at,
+    is_anonymous,
+    is_on_report_feed,
+    tags,
+    userId,
+    favoriters
+  } = word;
+  return {
+    id,
+    wordname,
+    meaning,
+    extended_description,
+    usages,
+    synonyms,
+    created_at,
+    updated_at,
+    is_anonymous,
+    is_on_report_feed,
+    tags,
+    userId,
+    favoriters
+  };
+};
+
 const word = mongoose.model('words', wordSchema);
 
 module.exports = word;
