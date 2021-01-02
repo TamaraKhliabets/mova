@@ -17,7 +17,7 @@ const deleteFollower = async (id, inputUserNameID) => {
   return profileSchema.findOne({ user_id: id }, async (err, profile) => {
     const newFollows = profile.follows.filter((userID) => userID === inputUserNameID);
 
-    // How we will catch error if userid doesnt have in follows array ??
+    // How we will catch error if userid doesnt have in follows array ??!
     return profileSchema.updateOne({ user_id: id }, { follows: newFollows });
   });
 };
