@@ -3,11 +3,10 @@ const router = require('express').Router();
 const wordController = require('./word.controller');
 const { catchErrors } = require('../../middleware/catchErrors');
 
-// api - для всего?
 router.route('/word').post(
   catchErrors(async (req, res) => {
     const word = await wordController.createWord(req.body);
-    return res.status(200).json({ word });
+    return res.status(200).json(wordSchema.toResponse(word));
   })
 );
 
@@ -19,7 +18,7 @@ router.route('/word').get(
       return res.status(404).send({ message: 'Words not found.' });
     }
 
-    return res.status(200).json({ words });
+    return res.status(200).json(words.map(wordSchema.toResponse));
   })
 );
 
@@ -32,7 +31,7 @@ router.route('/word/:id').get(
       return res.status(404).send({ message: 'Word not found.' });
     }
 
-    return res.status(200).json({ word });
+    return res.status(200).json(wordSchema.toResponse(word));
   })
 );
 
@@ -45,8 +44,8 @@ router.route('/word/:id').put(
       return res.status(404).send({ message: 'Word not found.' });
     }
 
-    const updateWord = await wordController.getWordById(id);
-    return res.status(200).json({ word: updateWord });
+    const updatedWord = await wordController.getWordById(id);
+    return res.status(200).json(wordSchema.toResponse(updatedWord));
   })
 );
 
