@@ -4,7 +4,24 @@ const getUserByUsername = async (username) => profileModel.getUserByUsername(use
 
 const getProfileById = async (userId) => profileModel.getProfileById(userId);
 
+const addFollower = async (id, data) => {
+  const { username } = data;
+
+  if (!username) {
+    return null;
+  }
+
+  const inputUserName = await profileModel.getUserByUsername(username);
+
+  if (!inputUserName) {
+    return null;
+  }
+
+  return profileModel.addFollower(id, inputUserName.id);
+};
+
 module.exports = {
   getUserByUsername,
-  getProfileById
+  getProfileById,
+  addFollower
 };

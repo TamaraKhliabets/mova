@@ -4,7 +4,7 @@ const profileSchema = new mongoose.Schema(
   {
     role: { type: String, default: 'USER_ROLE' },
     user_id: {},
-    follows: {}
+    follows: []
   },
   { versionKey: false }
 );

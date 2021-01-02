@@ -9,7 +9,12 @@ const getProfileById = async (userId) => {
   return profileSchema.findOne({ user_id: userId }).exec();
 };
 
+const addFollower = async (id, inputUserNameID) => {
+  return profileSchema.updateOne({ user_id: id }, { follows: inputUserNameID });
+};
+
 module.exports = {
   getUserByUsername,
-  getProfileById
+  getProfileById,
+  addFollower
 };
