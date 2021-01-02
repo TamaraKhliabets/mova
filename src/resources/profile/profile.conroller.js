@@ -20,8 +20,25 @@ const addFollower = async (id, data) => {
   return profileModel.addFollower(id, inputUserName.id);
 };
 
+const deleteFollower = async (id, data) => {
+  const { username } = data;
+
+  if (!username) {
+    return null;
+  }
+
+  const inputUserName = await profileModel.getUserByUsername(username);
+
+  if (!inputUserName) {
+    return null;
+  }
+
+  return profileModel.deleteFollower(id, inputUserName);
+};
+
 module.exports = {
   getUserByUsername,
   getProfileById,
-  addFollower
+  addFollower,
+  deleteFollower
 };
