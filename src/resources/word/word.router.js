@@ -20,20 +20,21 @@ router.route('/word').get(
       return res.status(404).send({ message: 'Words not found.' });
     }
 
-    return res.status(200).json({ words });
+    return res.status(200).json(words.map(wordSchema.toResponse));
   })
 );
 
 router.route('/word/:id').get(
   catchErrors(async (req, res) => {
     const { id } = req.params;
+
     const word = await wordController.getWordById(id);
 
     if (!word) {
       return res.status(404).send({ message: 'Word not found.' });
     }
 
-    return res.status(200).json({ word });
+    return res.status(200).json(wordSchema.toResponse(word));
   })
 );
 
