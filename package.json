@@ -2,7 +2,7 @@
   "name": "mova",
   "version": "1.0.0",
   "description": "",
-  "main": "./src/index.js",
+  "main": "",
   "engines": {
     "node": ">=10.0.0"
   },
@@ -27,7 +27,8 @@
     "express": "^4.17.1",
     "moment": "^2.29.1",
     "mongoose": "^5.11.8",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "winston": "^3.3.3"
   },
   "husky": {
     "hooks": {
