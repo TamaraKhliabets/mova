@@ -6,15 +6,16 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true },
     password: { type: String, required: true },
     createdAt: { type: String, required: false },
-    updatedAt: { type: String, required: false }
+    updatedAt: { type: String, required: false },
+    accessToken: { type: String, required: true }
   },
   { timestamps: true },
   { versionKey: false }
 );
 
 userSchema.statics.toResponse = (user) => {
-  const { id, username, email, createdAt, updatedAt } = user;
-  return { id, username, email, createdAt, updatedAt };
+  const { id, username, email, createdAt, updatedAt, accessToken } = user;
+  return { id, username, email, createdAt, updatedAt, accessToken };
 };
 
 const user = mongoose.model('users', userSchema);
