@@ -4,8 +4,12 @@ const User = require('./user.schema');
 const { NotFound, UnprocessableEntity, BadRequest } = require('../../error');
 
 const { catchErrors } = require('../../middlewares/errorMiddleware');
-const { generateAccessTokenAndRefreshToken } = require('../../utils/security/jwt');
+const {
+  generateAccessTokenAndRefreshToken,
+  getJwtValueByKey
+} = require('../../utils/security/jwt');
 const { comparePassword } = require('../../utils/security/hash');
+const { getRetrievedBearerTokenFromRequest } = require('../../utils/security/http');
 
 const registerUser = catchErrors(async (req, res) => {
   const { username: reqUsername, password: reqPassword, email: reqEmail } = req.body;
@@ -41,13 +45,13 @@ const loginUser = catchErrors(async (req, res) => {
   const { username: reqUsername, password: reqPassword, email: reqEmail } = req.body;
 
   // TODO Authentication for email or username ??????????????
-  const email = await userModel.findEmail(reqEmail);
-  if (email) {
+  const email = await userModel.findEmail(reqEmail.toLowerCase());
+  if (!email) {
     throw new UnprocessableEntity('Authentication failed, email not found');
   }
 
   const user = await userModel.findUserName(reqUsername);
-  if (user) {
+  if (!user) {
     throw new UnprocessableEntity('Authentication failed, user not found');
   }
 
@@ -64,7 +68,23 @@ const loginUser = catchErrors(async (req, res) => {
   return res.status(200).json({ ...result, ...token });
 });
 
+// eslint-disable-next-line no-unused-vars
+const getUser = catchErrors(async (req, res) => {
+  const token = getRetrievedBearerTokenFromRequest(req);
+
+  const userId = getJwtValueByKey(token, 'id');
+
+  const user = await userModel.findId(userId);
+  if (!user) {
+    throw new NotFound(`User with the id ${userId} was not found`);
+  }
+
+  const result = User.toResponse(user);
+  return res.status(200).json(result);
+});
+
 module.exports = {
   registerUser,
-  loginUser
+  loginUser,
+  getUser
 };

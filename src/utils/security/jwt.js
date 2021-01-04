@@ -32,7 +32,7 @@ const generateAccessTokenAndRefreshToken = async (user) => {
   const accessToken = jwt.sign(payload, SECRET_JWT_KEY, {
     expiresIn: '1h',
     jwtid: jwtId, // needed for the refresh token, as a refresh token only points to one single unique token
-    subject: user.id.toString() // the subject should be the users id (primary key)
+    subject: user.id.toString()
   });
 
   const refreshToken = await generateAccessTokenAndRefreshTokenForUser(user, jwtId);
@@ -40,6 +40,12 @@ const generateAccessTokenAndRefreshToken = async (user) => {
   return { accessToken, refreshToken };
 };
 
+const getJwtValueByKey = (token, key) => {
+  const decodedToken = jwt.decode(token);
+  return decodedToken[key];
+};
+
 module.exports = {
-  generateAccessTokenAndRefreshToken
+  generateAccessTokenAndRefreshToken,
+  getJwtValueByKey
 };
