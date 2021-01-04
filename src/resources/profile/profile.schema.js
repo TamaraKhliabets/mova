@@ -14,6 +14,6 @@ profileSchema.statics.toResponse = (profile) => {
   return { role, user_id, follows };
 };
 
-const profile = mongoose.model('Profiles', profileSchema);
+const Profile = mongoose.model('Profiles', profileSchema);
 
-module.exports = profile;
+module.exports = Profile;

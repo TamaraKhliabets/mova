@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-// const moment = require('moment');
 
 const saltRounds = 10;
 
@@ -12,19 +11,9 @@ const userSchema = new mongoose.Schema(
     // createdAt: { type: String, default: moment().subtract(24, 'hours').toDate() },
     // updatedAt: { type: String, default: moment().subtract(24, 'hours').toDate() },
     createdAt: { type: Date },
-    updatedAt: { type: Date },
-    accessToken: { type: String },
-    refreshToken: {
-      jwtId: { type: String },
-      used: { type: Boolean, default: false },
-      invalidated: { type: Boolean, default: false },
-      expiryDate: { Type: Date },
-      createdAt: { type: Date },
-      updatedAt: { type: Date }
-    }
+    updatedAt: { type: Date }
   },
-  { timestamps: true },
-  { versionKey: false }
+  { timestamps: true }
 );
 
 // eslint-disable-next-line func-names
@@ -57,6 +46,6 @@ userSchema.statics.toResponse = (user) => {
   return { id, username, email, createdAt, updatedAt, accessToken };
 };
 
-const user = mongoose.model('users', userSchema);
+const User = mongoose.model('users', userSchema);
 
-module.exports = user;
+module.exports = User;

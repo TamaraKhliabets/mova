@@ -54,6 +54,6 @@ const wordSchema = new Schema({
   likesCount: { type: Number, require: true }
 });
 
-const word = mongoose.model('Words', wordSchema);
+const Word = mongoose.model('Words', wordSchema);
 
-module.exports = { word };
+module.exports = Word;
