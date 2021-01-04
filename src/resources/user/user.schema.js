@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const moment = require('moment');
+// const moment = require('moment');
 
 const saltRounds = 10;
 
@@ -9,9 +9,19 @@ const userSchema = new mongoose.Schema(
     username: { type: String, required: true, unique: true, trim: true },
     email: { type: String, required: true, unique: true, trim: true, lowercase: true },
     password: { type: String, required: true },
-    createdAt: { type: String, default: moment().subtract(24, 'hours').toDate() },
-    updatedAt: { type: String, default: moment().subtract(24, 'hours').toDate() },
-    accessToken: { type: String, required: true }
+    // createdAt: { type: String, default: moment().subtract(24, 'hours').toDate() },
+    // updatedAt: { type: String, default: moment().subtract(24, 'hours').toDate() },
+    createdAt: { type: Date },
+    updatedAt: { type: Date },
+    accessToken: { type: String, required: true },
+    refreshToken: {
+      jwtId: { type: String },
+      used: { type: Boolean, default: false },
+      invalidated: { type: Boolean, default: false },
+      expiryDate: { Type: Date },
+      createdAt: { type: Date },
+      updatedAt: { type: Date }
+    }
   },
   { timestamps: true },
   { versionKey: false }

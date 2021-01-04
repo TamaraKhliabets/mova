@@ -4,7 +4,8 @@ const router = express.Router();
 
 const profileSchema = require('./profile.schema');
 const profileController = require('./profile.conroller');
-const { catchErrors } = require('../../config/error');
+
+const { catchErrors } = require('../../middlewares/errorMiddleware');
 
 router.route('/:username').get(
   catchErrors(async (req, res) => {

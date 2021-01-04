@@ -1,8 +1,8 @@
 const { createLogger } = require('winston');
 
-const { configConsole, configFile } = require('./loggerConfig');
+const { configConsole, configFile } = require('../config/loggerConfig');
 const getLogsFromRequest = require('../utils/getLogsFromRequest');
-const { handleError } = require('../config/error');
+const { handleErrorLogger } = require('./errorMiddleware');
 
 const winstonConsole = createLogger(configConsole);
 const winstonFile = createLogger(configFile);
@@ -24,9 +24,8 @@ const processErrorLogger = (message, errorType) => {
   return winstonFile;
 };
 
-// eslint-disable-next-line no-unused-vars
-const errorLogger = (err, req, res, next) => {
-  const { statusCode, message } = handleError(err, res);
+const errorLoggerMiddleware = (err, req, res, next) => {
+  const { statusCode, message } = handleErrorLogger(err, req, res, next);
 
   const level = statusCode >= 400 && statusCode < 500 ? 'warn' : 'error';
 
@@ -37,4 +36,4 @@ const errorLogger = (err, req, res, next) => {
   winstonFile.log(level, `${errString} | Request: ${logToFile}`);
 };
 
-module.exports = { incomingLogger, processErrorLogger, errorLogger };
+module.exports = { incomingLogger, processErrorLogger, errorLoggerMiddleware };

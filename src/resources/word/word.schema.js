@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
-const wordSchema = new mongoose.Schema({
+const { Schema } = mongoose;
+
+const wordSchema = new Schema({
   wordname: {
     type: String,
     required: true,
@@ -8,6 +10,7 @@ const wordSchema = new mongoose.Schema({
       unique: true
     }
   },
+  author: { type: String },
   meaning: {
     type: String,
     required: true
@@ -46,10 +49,11 @@ const wordSchema = new mongoose.Schema({
       tagname: String
     }
   ],
-  userId: { type: mongoose.ObjectId, ref: 'userProfile' },
-  favoriters: [{ type: mongoose.ObjectId, ref: 'userProfile' }]
+  userId: { type: Schema.Types.ObjectId, ref: 'userProfile' },
+  favorites: { type: Schema.Types.ObjectId, ref: 'userProfile' },
+  likesCount: { type: Number, require: true }
 });
 
-const word = mongoose.model('words', wordSchema);
+const word = mongoose.model('Words', wordSchema);
 
-module.exports = word;
+module.exports = { word };

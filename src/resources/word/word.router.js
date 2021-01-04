@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const wordController = require('./word.controller');
-const { catchErrors } = require('../../config/error');
+const { catchErrors } = require('../../middlewares/errorMiddleware');
 
 // api - для всего?
 router.route('/word').post(

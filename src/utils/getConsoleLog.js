@@ -1,5 +1,5 @@
 const { createLogger } = require('winston');
-const { configConsole } = require('../middlewares/loggerConfig');
+const { configConsole } = require('../config/loggerConfig');
 
 const winstonConsole = createLogger(configConsole);
 
