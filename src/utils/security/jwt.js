@@ -6,7 +6,7 @@ const RefreshToken = require('../../resources/refreshToken/refreshToken.schema')
 
 const { SECRET_JWT_KEY } = require('../../config');
 
-const generateRefreshTokenForUserAndToken = async (user, jwtId) => {
+const generateAccessTokenAndRefreshTokenForUser = async (user, jwtId) => {
   const refreshToken = new RefreshToken();
 
   // TODO we need connection by id or something (by populate) ?
@@ -35,7 +35,7 @@ const generateAccessTokenAndRefreshToken = async (user) => {
     subject: user.id.toString() // the subject should be the users id (primary key)
   });
 
-  const refreshToken = await generateRefreshTokenForUserAndToken(user, jwtId);
+  const refreshToken = await generateAccessTokenAndRefreshTokenForUser(user, jwtId);
 
   return { accessToken, refreshToken };
 };

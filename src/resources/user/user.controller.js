@@ -1,10 +1,11 @@
 const userModel = require('./user.model');
 const User = require('./user.schema');
 
-const { NotFound, UnprocessableEntity } = require('../../error');
+const { NotFound, UnprocessableEntity, BadRequest } = require('../../error');
 
 const { catchErrors } = require('../../middlewares/errorMiddleware');
 const { generateAccessTokenAndRefreshToken } = require('../../utils/security/jwt');
+const { comparePassword } = require('../../utils/security/hash');
 
 const registerUser = catchErrors(async (req, res) => {
   const { username: reqUsername, password: reqPassword, email: reqEmail } = req.body;
@@ -29,6 +30,7 @@ const registerUser = catchErrors(async (req, res) => {
 
   const newUser = await userModel.registerUser(req.body);
 
+  // create token
   const token = await generateAccessTokenAndRefreshToken(newUser);
 
   const result = User.toResponse(newUser);
@@ -38,23 +40,28 @@ const registerUser = catchErrors(async (req, res) => {
 const loginUser = catchErrors(async (req, res) => {
   const { username: reqUsername, password: reqPassword, email: reqEmail } = req.body;
 
-  const toHaveEmail = await userModel.findEmail(reqEmail);
-  if (!toHaveEmail) {
+  // TODO Authentication for email or username ??????????????
+  const email = await userModel.findEmail(reqEmail);
+  if (email) {
     throw new UnprocessableEntity('Authentication failed, email not found');
   }
 
-  const toHaveUser = await userModel.findUserName(reqUsername);
-  if (!toHaveUser) {
+  const user = await userModel.findUserName(reqUsername);
+  if (user) {
     throw new UnprocessableEntity('Authentication failed, user not found');
   }
 
-  const isMatch = await User.comparePassword(reqPassword, toHaveUser.password);
-
+  // check if the password is valid
+  const isMatch = await comparePassword(reqPassword, user.password);
   if (!isMatch) {
-    return res.json({ loginSuccess: false, message: 'Wrong password' });
+    throw new BadRequest('Wrong password');
   }
 
-  return res.json();
+  // retrieve tokens
+  const token = await generateAccessTokenAndRefreshToken(user);
+
+  const result = User.toResponse(user);
+  return res.status(200).json({ ...result, ...token });
 });
 
 module.exports = {
