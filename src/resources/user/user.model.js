@@ -1,19 +1,19 @@
 const user = require('./user.schema');
 
-const getEmails = async (email) => {
+const findEmail = async (email) => {
   return user.findOne({ email }).exec();
 };
 
-const getUserNames = async (username) => {
+const findUserName = async (username) => {
   return user.findOne({ username }).exec();
 };
 
-const addUser = async (data) => {
+const registerUser = async (data) => {
   return user.create(data);
 };
 
 module.exports = {
-  getEmails,
-  getUserNames,
-  addUser
+  findUserName,
+  findEmail,
+  registerUser
 };

@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema(
     // updatedAt: { type: String, default: moment().subtract(24, 'hours').toDate() },
     createdAt: { type: Date },
     updatedAt: { type: Date },
-    accessToken: { type: String, required: true },
+    accessToken: { type: String },
     refreshToken: {
       jwtId: { type: String },
       used: { type: Boolean, default: false },
