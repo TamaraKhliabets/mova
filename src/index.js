@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const { PORT, MONGO_DB_CONNECTION_URL } = require('./config');
 
 const userRouter = require('./resources/user/user.router');
+const wordRouter = require('./resources/word/word.router');
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use('/', (req, res, next) => {
   next();
 });
 app.use('/users', userRouter);
+app.use('/api/dictionary', wordRouter);
 
 const connectDb = () => {
   const db = mongoose.connection;
